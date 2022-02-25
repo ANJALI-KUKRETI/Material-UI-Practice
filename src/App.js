@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import SearchAppBar from "./components/Appbar";
+import TourCard from "./components/TourCard";
+import { Grid, Container, Typography } from "@mui/material";
+import cities from "./data.json";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SearchAppBar />
+      <Container sx={{ marginY: 5 }}>
+        {cities.map((city) => (
+          <>
+            <Typography
+              variant="h4"
+              component="h2"
+              marginTop={5}
+              marginBottom={3}
+            >
+              Top {city.name} Tours
+            </Typography>
+            <Grid container spacing={3}>
+              {city.tours.map((tour, index) => (
+                <TourCard tour={tour} key={index} />
+              ))}
+            </Grid>
+          </>
+        ))}
+      </Container>
     </div>
   );
 }
